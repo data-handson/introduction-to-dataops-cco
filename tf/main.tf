@@ -36,11 +36,3 @@ variable "target_environment" {
   }
 }
  
-module "fabric_env" {
-  source = "./modules/fabric-environment"
- 
-  environment  = upper(var.target_environment)
-  trigram      = "SAM"
-  capacity_id  = "d38db894-91ed-4915-901d-3d229662e961"
-  principal_id = "cd76f376-e762-47e8-b795-a05d40e61f67"
-}
