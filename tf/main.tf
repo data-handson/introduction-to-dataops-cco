@@ -21,6 +21,10 @@ terraform {
   }
 }
 
+provider "azurerm" {
+  subscription_id = "0864cee4-2d12-4a41-b878-50f960ea5139"
+  features {}
+}
 # coucou
 
 
