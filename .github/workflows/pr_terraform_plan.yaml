@@ -4,6 +4,10 @@ on:
     branches: [ main ]
 env:
   TF_WORKING_DIR: './tf'
+  ARM_CLIENT_ID: ${{ secrets.SPN_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.SPN_CLIENT_SECRET }}
+  ARM_TENANT_ID: ${{ secrets.SPN_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.SPN_SUBSCRIPTION_ID }}
 jobs:
   terraform-plan:
     runs-on: ubuntu-latest
