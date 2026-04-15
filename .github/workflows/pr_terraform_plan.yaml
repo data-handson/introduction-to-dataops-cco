@@ -2,6 +2,10 @@ name: PR Terraform Plan
 on:
   pull_request:
     branches: [ main ]
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
 env:
   TF_WORKING_DIR: './tf'
   ARM_CLIENT_ID: ${{ secrets.SPN_CLIENT_ID }}
