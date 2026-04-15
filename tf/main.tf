@@ -21,6 +21,8 @@ terraform {
   }
 }
 
+# coucou
+
 
 # Step 2: Create Fabric workspace, lakehouse and role assignment (direct resources)
 resource "fabric_workspace" "dev" {
