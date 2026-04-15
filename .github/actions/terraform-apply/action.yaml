@@ -1,0 +1,43 @@
+name: "Execute Terraform Apply"
+description: "GitHub Action to execute Terraform apply for a specified product and deployment group."
+inputs:
+  backend_resource_group:
+    description: "The resource group name for the backend storage account"
+    required: true
+  backend_storage_account:
+    description: "The backend storage account name for Terraform state"
+    required: true
+  backend_container_name:
+    description: "The backend container name for Terraform state"
+    required: true
+  backend_tfstate_key:
+    description: "The backend key for Terraform state"
+    required: true
+  terraform_directory:
+    description: "The directory containing Terraform configuration files"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: "Checkout Repository"
+      uses: actions/checkout@v3
+
+    - name: "Set up Terraform"
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: "1.8.0"
+
+    - name: "Initialize Terraform"
+      shell: bash
+      run: |
+        terraform init \
+          -backend-config="resource_group_name=${{ inputs.backend_resource_group }}" \
+          -backend-config="storage_account_name=${{ inputs.backend_storage_account }}" \
+          -backend-config="container_name=${{ inputs.backend_container_name }}" \
+          -backend-config="key=${{ inputs.backend_tfstate_key }}" \
+          -input=false
+
+    - name: "Execute Terraform Apply"
+      shell: bash
+      run: |
+        terraform apply -input=false tfplan
